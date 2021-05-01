@@ -2,6 +2,34 @@
 
 **MapLibre GL** is a community led fork derived from [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js) prior to their switch to a non-OSS license.
 
+## How to use
+
+```
+import { maplibregl } from "https://taisukef.github.io/maplibre-gl-js/maplibre-gl-es.js";
+```
+
+## How to make ES module
+
+```bash
+$ npm i
+$ npm run build-prod-min
+```
+edit dist/maplibre-gl.js as ES module
+```
+const exports = {};
+(function (global, factory) {
+typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+typeof define === 'function' && define.amd ? define(factory) :
+(global = global || self, global.maplibregl = factory());
+}(exports, (function () { 'use strict';
+
+~ omit ~
+
+const maplibregl = exports.maplibregl;
+export { maplibregl };
+```
+put as docs/maplibre-gl-es.js
+
 ### Migrating from mapbox-gl
 
 If you depend on mapbox-gl directly, simply replace `mapbox-gl` with `maplibre-gl` in `package.json`:
